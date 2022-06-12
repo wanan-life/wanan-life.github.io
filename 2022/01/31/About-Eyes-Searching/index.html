@@ -1,269 +1,94 @@
 
-
 <!DOCTYPE html>
 <html lang="">
+
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
+  
+    <meta name="keywords" content="" />
   
 
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About-Eyes-Searching [ Wanan&#39;s Blog ]</title>
-
-  <link rel="icon" href="/img/favicon.ico">
-
-
-    <meta name="author" content="Wanan">
-
-
-    <meta name="subtitle" content="Wanan's Blog">
-
-
-    <meta name="Description" content="Hello,here is Wanan&#39;s Blog">
-
-
-
-  <link rel="alternate" href="/atom.xml " title="Wanan&#39;s Blog" type="application/atom+xml">
-
-
   
-    <link rel="stylesheet" href="/css/main.css">
+    <meta name="description" content="Hello,here is Wanan&#39;s Blog" />
   
-
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>About-Eyes-Searching [ Wanan&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/xoxo.css">
+    
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
-  <body data-theme="light" class="notransition">
-    <script>
-      const body = document.body;
-      const data = body.getAttribute("data-theme");
-      const initTheme = (state) => {
-        if (state === "dark") {
-          body.setAttribute("data-theme", "dark");
-        } else if (state === "light") {
-          body.removeAttribute("data-theme");
-        } else {
-          localStorage.setItem("theme", data);
-        }
-      };
-   
-      initTheme(localStorage.getItem("theme"));
-      
-      setTimeout(() => body.classList.remove("notransition"), 75);
-    </script>
-  <div class="navbar" role="navigation">
-    <nav class="menu">
-      <input type="checkbox" id="menu-trigger" class="menu-trigger" />
-      <label for="menu-trigger">
-        <span class="menu-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 512 512"
-          >
-            <path
-              d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"
-            />
-          </svg>
-        </span>
-      </label>
-      <a id="mode">
-        <svg
-          class="mode-sunny"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 512 512"
-        >
-          <title>LIGHT</title>
-          <line
-            x1="256"
-            y1="48"
-            x2="256"
-            y2="96"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="256"
-            y1="416"
-            x2="256"
-            y2="464"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="403.08"
-            y1="108.92"
-            x2="369.14"
-            y2="142.86"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="142.86"
-            y1="369.14"
-            x2="108.92"
-            y2="403.08"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="464"
-            y1="256"
-            x2="416"
-            y2="256"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="96"
-            y1="256"
-            x2="48"
-            y2="256"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="403.08"
-            y1="403.08"
-            x2="369.14"
-            y2="369.14"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="142.86"
-            y1="142.86"
-            x2="108.92"
-            y2="108.92"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <circle
-            cx="256"
-            cy="256"
-            r="80"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-        </svg>
-        <svg
-          class="mode-moon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 512 512"
-        >
-          <title>DARK</title>
-          <line
-            x1="256"
-            y1="48"
-            x2="256"
-            y2="96"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="256"
-            y1="416"
-            x2="256"
-            y2="464"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="403.08"
-            y1="108.92"
-            x2="369.14"
-            y2="142.86"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="142.86"
-            y1="369.14"
-            x2="108.92"
-            y2="403.08"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="464"
-            y1="256"
-            x2="416"
-            y2="256"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="96"
-            y1="256"
-            x2="48"
-            y2="256"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="403.08"
-            y1="403.08"
-            x2="369.14"
-            y2="369.14"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <line
-            x1="142.86"
-            y1="142.86"
-            x2="108.92"
-            y2="108.92"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-          <circle
-            cx="256"
-            cy="256"
-            r="80"
-            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-          />
-        </svg>
-      </a>
-      <div class="trigger">
-        <div class="trigger-container">
-          
-            
-            
-            
-            
-            
-            
-            <a class="menu-link " href="/"> Home</a>
-          
-            
-            
-            
-            
-            
-            
-            <a class="menu-link " href="/about/"> About</a>
-          
-            
-            
-            
-            
-            
-            
-            <a class="menu-link " href="/archives/"> Archives</a>
-          
-            
-            
-            
-            
-            
-            
-            <a class="menu-link " href="/tags/"> Tags</a>
-          
-        </div>
-      </div>
-    </nav>
-  </div>
-  
-<div class="wrapper post">
-  <main class="page-content" aria-label="Content">
-      <header class="header">
-        
-        <h1 class="header-title" itemprop="headline">About-Eyes-Searching</h1>
-          <div class="post-meta">
-            <time>Jan 31, 2022</time>
-            <span itemprop="author">
-              <span itemprop="name">Wanan</span>
-            </span>
-          </div>
-        </header>
 
-          <div class="page-content"><h1 id="What-is-Eyes-Searching"><a href="#What-is-Eyes-Searching" class="headerlink" title="What is Eyes-Searching"></a>What is Eyes-Searching</h1><blockquote>
+
+<body>
+  <div class="nav-container">
+    <nav class="home-menu pure-menu pure-menu-horizontal">
+  <a class="pure-menu-heading" href="/">
+    <img class="avatar" src="https://wanan-life.github.io/images/logo.png">
+    <span class="title">Wanan&#39;s Blog</span>
+  </a>
+
+  <ul class="pure-menu-list clearfix">
+      
+          
+            <li class="pure-menu-item"><a href="/" class="pure-menu-link">首页</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/about" class="pure-menu-link">关于</a></li>
+          
+      
+  </ul>
+   
+</nav>
+  </div>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        About-Eyes-Searching
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2022-01-31T08:36:25.000Z">
+        2022-01-31
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+      
+    </header>
+
+    <div class="post-content">
+      <h1 id="What-is-Eyes-Searching"><a href="#What-is-Eyes-Searching" class="headerlink" title="What is Eyes-Searching"></a>What is Eyes-Searching</h1><blockquote>
 <p>没错这就是一个重复的轮子</p>
 </blockquote>
 <p><strong>[*]我不知道为什么要写这个非常烂的代码。虽然他实现了我的目的、满足了我的需求，但是他就是个非常烂的代码。</strong></p>
@@ -277,50 +102,197 @@
 <p><a target="_blank" rel="noopener" href="https://asciinema.org/a/juWtqfoZJZ0WVVCDWifDtDqmU"><img src="https://asciinema.org/a/juWtqfoZJZ0WVVCDWifDtDqmU.svg" alt="asciicast"></a></p>
 <hr>
 <p><strong>好了，该说的我都说了，看你如何选择了。</strong></p>
-<h1 id="oh-Shit，这个代码写的好烂啊"><a href="#oh-Shit，这个代码写的好烂啊" class="headerlink" title="oh Shit，这个代码写的好烂啊"></a>oh Shit，这个代码写的好烂啊</h1></div>
-          <nav class="post-nav">
-    
-    <a class="post-nav-item post-nav-prev" href="/2022/02/18/BaiDu-SSRF/">
-      <div class="nav-arrow">&lt;&nbsp;NEWER</div>
-      <span class="post-title">BaiDu-SSRF</span>
-    </a>
-    
-    
-    <a class="post-nav-item post-nav-next" href="/2022/01/30/HelloWorld/">
-      <div class="nav-arrow">OLDER&nbsp;&gt;</div>
-      <span class="post-title">Hello World</span>
-    </a>
-    
-  </nav>
+<h1 id="oh-Shit，这个代码写的好烂啊"><a href="#oh-Shit，这个代码写的好烂啊" class="headerlink" title="oh Shit，这个代码写的好烂啊"></a>oh Shit，这个代码写的好烂啊</h1>
+    </div>
 
-   </main>
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
+    
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-Eyes-Searching"><span class="toc-text">What is Eyes-Searching</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-text">如何使用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#oh-Shit%EF%BC%8C%E8%BF%99%E4%B8%AA%E4%BB%A3%E7%A0%81%E5%86%99%E7%9A%84%E5%A5%BD%E7%83%82%E5%95%8A"><span class="toc-text">oh Shit，这个代码写的好烂啊</span></a></li></ol>
+  </div>
+
+
+  </div>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
+  <div style="margin: auto; text-align: center; font-size: 0.8em; color: grey;">低调求发展.</div>
 </div>
 
-  <footer class="footer">
-    <small class="footer_copyright">
-      <div id="bottom-inner">
-        © 2021 Site by Wanan using
-        <a target="_blank" rel="noopener" href="http://hexo.io">hexo blog framework</a>.
-        <br>
-        <p> Theme is <a target="_blank" rel="noopener" href="https://github.com/dewjohn/hexo-theme-klise">Klise</a></p>
-      </div>
-    </small>
-  </footer>
   
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2022/01/30/HelloWorld/" rel="next" title="Hello World">
+          Hello World
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+          
+          <a href="/2022/02/18/BaiDu-SSRF/" rel="prev" title="BaiDu-SSRF">
+            BaiDu-SSRF
+          </a>
+          <span>〉</span>
+        
+      </div>
+    </div>
   
 
+
+    </div>
+
     
-      <script src="/js/main.js"></script>
-    
+
+  </div>
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+        <a class="bottom-item" target="_blank" rel="noopener" href="https://wanan.life">首页</a> |
+        <a class="bottom-item" href="https://wanan.life" target="_blank">主站</a> |
+        <a class="bottom-item" href="https://github.com/wanan-life" target="_blank">GitHub</a> |
+        <a class="bottom-item" href="https://hexo.io" target="_blank">Powered by hexo</a> |
+        <a class="bottom-item" href="https://github.com/KevinOfNeu/hexo-theme-xoxo" target="_blank">Theme xoxo</a>
+    </div>
+</footer>
   
-  <script>
-    window.FPConfig = {
-      delay: 0,
-      ignoreKeywords: [],
-      maxRPS: 3,
-      hoverDelay: 50,
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+<script>
+  (function(window, document, undefined) {
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+    var hearts = [];
+    window.requestAnimationFrame = (function() {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+    init();
+
+    function init() {
+      css(".heart{z-index:9999;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+      attachEvent();
+      gameloop();
+      addMenuEvent();
+    }
+
+    function gameloop() {
+      for (var i = 0; i < hearts.length; i++) {
+        if (hearts[i].alpha <= 0) {
+          document.body.removeChild(hearts[i].el);
+          hearts.splice(i, 1);
+          continue;
+        }
+        hearts[i].y--;
+        hearts[i].scale += 0.004;
+        hearts[i].alpha -= 0.013;
+        hearts[i].el.style.cssText = "left:" + hearts[i].x + "px;top:" + hearts[i].y + "px;opacity:" + hearts[i].alpha + ";transform:scale(" + hearts[i].scale + "," + hearts[i].scale + ") rotate(45deg);background:" + hearts[i].color;
+      }
+      requestAnimationFrame(gameloop);
+    }
+
+    /**
+     * 给logo设置点击事件
+     * 
+     * - 回到顶部
+     * - 出现爱心
+     */
+    function attachEvent() {
+      var old = typeof window.onclick === "function" && window.onclick;
+      var logo = document.getElementById("logo");
+      if (logo) {
+        logo.onclick = function(event) {
+          returnTop();
+          old && old();
+          createHeart(event);
+        }
+      }
+      
+    }
+
+    function createHeart(event) {
+      var d = document.createElement("div");
+      d.className = "heart";
+      hearts.push({
+        el: d,
+        x: event.clientX - 5,
+        y: event.clientY - 5,
+        scale: 1,
+        alpha: 1,
+        color: randomColor()
+      });
+      document.body.appendChild(d);
+    }
+
+    function css(css) {
+      var style = document.createElement("style");
+      style.type = "text/css";
+      try {
+        style.appendChild(document.createTextNode(css));
+      } catch (ex) {
+        style.styleSheet.cssText = css;
+      }
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
+
+    function randomColor() {
+      // return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
+      return "#F44336";
+    }
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        if (toc) {
+          menu.onclick = function() {
+            if (toc) {
+              if (toc.style.display == 'block') {
+                toc.style.display = 'none';
+              } else {
+                toc.style.display = 'block';
+              }
+            }
+          };
+        } else {
+          menu.style.display = 'none';
+        }
+      }
+    }
+
+  })(window, document);
+</script>
+
+  
+
+
+
 </body>
 </html>
