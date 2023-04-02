@@ -90,7 +90,7 @@
     <div class="post-content">
       <center><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1944467250&auto=1&height=66"></iframe></center>
 
-<h1 id="This-is-my-wife"><a href="#This-is-my-wife" class="headerlink" title="This is my wife"></a>This is my wife</h1><p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzhw8flnonj20rs0qjwil.jpg" alt="mywife"></p>
+<h1 id="This-is-my-wife"><a href="#This-is-my-wife" class="headerlink" title="This is my wife"></a>This is my wife</h1><p><img src="https://wananblog.oss-cn-shanghai.aliyuncs.com/blogimage/68747470733a2f2f7778342e73696e61696d672e636e2f6d77323030302f3030367a734d525667793167787138336e69366d796a333173633264736e70642e6a7067.jpeg" alt="mywife"></p>
 <hr>
 <h1 id="发现过程"><a href="#发现过程" class="headerlink" title="发现过程"></a>发现过程</h1><p>百度贴吧是有个站子转发功能的，文章转发这种地方是存在ssr最大的可疑性的地方之一！<br>首先看到转发时是带有ur参数请求的，百度转发–＞获取url参数数值–＞请求该地址–&gt;获取返回信息<br>我先赋值了一个dnslog 平台域名，发现返回了来自百度的ip</p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzhwdrjxwpj20dr062wel.jpg" alt="dnslog"><br>是的，是来自某度某机房的请求<br>小tips：【测试的时候打开f12的network，看看有没有出现你请求的地址。如果没有那可能就是他的服<br>务器的请求，如果有那就是你本地的请求了。】<br>这时我尝试着访问内网P， &lt;127.0.0.1&gt;，哦不这大扯淡了。如果这个请求成功那真的很不现实了。<br>我询问了百度的VR小姐姐，得到了他们的ssrf测试接口：10.199.7.105<br>这时候我再去请求这个接口，发现失败了。但是我坚信这个地方存在ssr<br>我抽了根烟思考了一会，想到利用302跳转测试。详细php后端代码</p>
