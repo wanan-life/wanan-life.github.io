@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
+  
+    <meta name="keywords" content="bug bounty,ssrf," />
+  
+
+  
+    <meta name="description" content="Hello,here is Wanan&#39;s Blog" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>JD-SSRF [ Wanan&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/xoxo.css">
+    
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="nav-container">
+    <nav class="home-menu pure-menu pure-menu-horizontal">
+  <a class="pure-menu-heading" href="/">
+    <img class="avatar" src="https://wanan-life.github.io/images/logo.png">
+    <span class="title">Wanan&#39;s Blog</span>
+  </a>
+
+  <ul class="pure-menu-list clearfix">
+      
+          
+            <li class="pure-menu-item"><a href="/" class="pure-menu-link">首页</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/about" class="pure-menu-link">关于</a></li>
+          
+      
+  </ul>
+   
+</nav>
+  </div>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        JD-SSRF
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2023-05-09T10:47:32.000Z">
+        2023-05-09
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug-bounty/" rel="tag">bug bounty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li></ul>
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+      
+    </header>
+
+    <div class="post-content">
+      <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>最近和团队的小伙伴一起挖某东src，也好久没有更新自己的博客了，所以拿出几个实战案例来分享。</p>
+<p>作为一个向来喜欢寻找发现ssrf漏洞的漏洞赏金猎人，此文章就分享几个我在挖某东src的ssrf实战案例吧。</p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例:"></a>案例:</h1><h1 id="export-pdf-ssrf"><a href="#export-pdf-ssrf" class="headerlink" title="export-pdf-ssrf:"></a>export-pdf-ssrf:</h1><p>这是关于pdf导出的ssrf技巧。我相信大家在很多场景下都遇见过关于导出功能的点。例如：</p>
+<blockquote>
+<p>文章导出为pdf</p>
+<p>项目导出为pdf</p>
+<p>….</p>
+</blockquote>
+<p><img src="https://p.ipic.vip/ve7oi2.png" alt="image-20230509181750348"></p>
+<p>我在对一些资产进行访问观察时，发现了此处。这是一个将文章导出为pdf格式的功能点。这时我随便写下了一点内容，并点击导出后进行抓包。</p>
+<p><img src="https://p.ipic.vip/ksb7yb.png" alt="image-20230509182054153"></p>
+<p>burp收到请求后，我观察此数据包，发现了一个非常有趣的参数：html，对此分析以后，发现这是后端将前端获取到的内容转换成html格式再传入后端导出为pdf格式的文件。</p>
+<p>ps：此包非常大，导致我的电脑接收的时候卡顿了10几秒，所以我并未截取原始数据包的截图。</p>
+<p>这时，我思考到了html中的iframe标签，</p>
+<p><img src="https://p.ipic.vip/5in0y0.png" alt="image-20230509182630373"></p>
+<blockquote>
+<p>IFRAME是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTML?fromModule=lemma_inlink">HTML</a>标签，作用是文档中的文档，或者浮动的框架(FRAME)。iframe元素会创建包含另外一个文档的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%85%E8%81%94/53355541?fromModule=lemma_inlink">内联</a>框架</p>
+</blockquote>
+<p>是的我想到可以使用iframe标签包含一个地址，后端在处理此标签时，是否会代出内容后整理成pdf文件返回给我。</p>
+<p><img src="https://p.ipic.vip/mq8fly.png" alt="image-20230509182703131"></p>
+<p>事实可能并不为我所愿。他只返回了一个空的iframe框架给我。这时我依然并未放弃，因为我认为此功能点可能做过漏洞修复处理。</p>
+<p>这时我想起团队群内某位队员发过的一篇文章：<a target="_blank" rel="noopener" href="https://forum.butian.net/share/1497%EF%BC%88%E6%88%91%E5%9C%A8%E7%86%9F%E8%AF%BB%E5%B9%B6%E8%83%8C%E8%AF%B5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%88%91%E8%A7%89%E5%BE%97%E5%8F%AF%E4%BB%A5%E5%B0%9D%E8%AF%95%E4%B8%80%E4%B8%8Bmeta%E6%A0%87%E7%AD%BE%EF%BC%89,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E4%B8%BA0%E7%A7%92%E5%88%B7%E6%96%B0%E8%AF%B7%E6%B1%82%E3%80%82">https://forum.butian.net/share/1497（我在熟读并背诵以后，我觉得可以尝试一下meta标签）,并且设置为0秒刷新请求。</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=http://xxx.xxx.com&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p.ipic.vip/fgxrk7.png" alt="image-20230509183223257"></p>
+<p>当我拿着返回的pdf文件下载地址的时候，我发现成功访问了jd的ssrf测试地址；</p>
+<p><img src="https://p.ipic.vip/w3g2xy.png" alt="image-20230509183310517"></p>
+<h2 id="blind-ssrf（time-determine）"><a href="#blind-ssrf（time-determine）" class="headerlink" title="blind-ssrf（time determine）"></a>blind-ssrf（time determine）</h2><p>图片检索功能，是一次非常常见的ssrf多发事故点。也是在寻找ssrf漏洞的必测点。在对某资产阅读以后，我发现了一处以图搜图功能。我向其赋值以后使用burp抓包</p>
+<p><img src="https://p.ipic.vip/aaasvv.png" alt="image-20230509183716816"></p>
+<p>发现了一个非常有趣的参数：url。是的，这是一个非常常见的参数，我甚至在我的burp插件hae中也对这参数名称设置了一个红色</p>
+<p><img src="https://p.ipic.vip/jjslvt.png" alt="image-20230509183805454"></p>
+<p>因为赋值一个地址以后，发现这不会返回任何有赋值赋值相关的内容。所以我赋值了我的一个dnslog测试地址。</p>
+<p><img src="https://p.ipic.vip/0w9ky5.png" alt="image-20230509184041289"></p>
+<p>从dnslog中，我得到了返回IP；对其查询以后知道这是来自上海某东云的云服务IP；随后我又测试了一个不允许访问的地址，例如google</p>
+<p><img src="https://p.ipic.vip/eyr1lp.png" alt="image-20230509184230913"></p>
+<p><img src="https://p.ipic.vip/b39cb5.png" alt="image-20230509184246398"></p>
+<p>在非常久的一个等待以后，我发现在返回时间这里出现了问题，他返回的时间足足有20秒之久。随机我立刻赋值了jd官方的ssrf测试地址；</p>
+<p><img src="https://p.ipic.vip/8wxsv4.png" alt="image-20230509184420093"></p>
+<p><img src="https://p.ipic.vip/vrpg7w.png" alt="image-20230509184441860"></p>
+<p>他返回了一个正常的数据，并且是瞬间的完成了请求。</p>
+
+    </div>
+
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
+    
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#export-pdf-ssrf"><span class="toc-text">export-pdf-ssrf:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#blind-ssrf%EF%BC%88time-determine%EF%BC%89"><span class="toc-text">blind-ssrf（time determine）</span></a></li></ol></li></ol>
+  </div>
+
+
+  </div>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
+  <div style="margin: auto; text-align: center; font-size: 0.8em; color: grey;">低调求发展.</div>
+</div>
+
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2022/07/27/%E5%85%B3%E4%BA%8E%E8%93%9D%E5%87%8COA%20treexml.tmpl%20%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" rel="next" title="关于蓝凌OA treexml.tmpl 远程命令执行漏洞分析">
+          关于蓝凌OA treexml.tmpl 远程命令执行漏洞分析
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+          
+      </div>
+    </div>
+  
+
+
+    </div>
+
+    
+
+  </div>
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+        <a class="bottom-item" target="_blank" rel="noopener" href="https://wanan.life">首页</a> |
+        <a class="bottom-item" href="https://wanan.life" target="_blank">主站</a> |
+        <a class="bottom-item" href="https://github.com/wanan-life" target="_blank">GitHub</a> |
+        <a class="bottom-item" href="https://hexo.io" target="_blank">Powered by hexo</a> |
+        <a class="bottom-item" href="https://github.com/KevinOfNeu/hexo-theme-xoxo" target="_blank">Theme xoxo</a>
+    </div>
+</footer>
+  
+
+<script>
+  (function(window, document, undefined) {
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+    var hearts = [];
+    window.requestAnimationFrame = (function() {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+    init();
+
+    function init() {
+      css(".heart{z-index:9999;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+      attachEvent();
+      gameloop();
+      addMenuEvent();
+    }
+
+    function gameloop() {
+      for (var i = 0; i < hearts.length; i++) {
+        if (hearts[i].alpha <= 0) {
+          document.body.removeChild(hearts[i].el);
+          hearts.splice(i, 1);
+          continue;
+        }
+        hearts[i].y--;
+        hearts[i].scale += 0.004;
+        hearts[i].alpha -= 0.013;
+        hearts[i].el.style.cssText = "left:" + hearts[i].x + "px;top:" + hearts[i].y + "px;opacity:" + hearts[i].alpha + ";transform:scale(" + hearts[i].scale + "," + hearts[i].scale + ") rotate(45deg);background:" + hearts[i].color;
+      }
+      requestAnimationFrame(gameloop);
+    }
+
+    /**
+     * 给logo设置点击事件
+     * 
+     * - 回到顶部
+     * - 出现爱心
+     */
+    function attachEvent() {
+      var old = typeof window.onclick === "function" && window.onclick;
+      var logo = document.getElementById("logo");
+      if (logo) {
+        logo.onclick = function(event) {
+          returnTop();
+          old && old();
+          createHeart(event);
+        }
+      }
+      
+    }
+
+    function createHeart(event) {
+      var d = document.createElement("div");
+      d.className = "heart";
+      hearts.push({
+        el: d,
+        x: event.clientX - 5,
+        y: event.clientY - 5,
+        scale: 1,
+        alpha: 1,
+        color: randomColor()
+      });
+      document.body.appendChild(d);
+    }
+
+    function css(css) {
+      var style = document.createElement("style");
+      style.type = "text/css";
+      try {
+        style.appendChild(document.createTextNode(css));
+      } catch (ex) {
+        style.styleSheet.cssText = css;
+      }
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
+
+    function randomColor() {
+      // return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
+      return "#F44336";
+    }
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        if (toc) {
+          menu.onclick = function() {
+            if (toc) {
+              if (toc.style.display == 'block') {
+                toc.style.display = 'none';
+              } else {
+                toc.style.display = 'block';
+              }
+            }
+          };
+        } else {
+          menu.style.display = 'none';
+        }
+      }
+    }
+
+  })(window, document);
+</script>
+
+  
+
+
+
+</body>
+</html>
